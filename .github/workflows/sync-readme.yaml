@@ -10,20 +10,16 @@ jobs:
         uses: actions/checkout@v4
         with:
           path: main
-          # token: ${{ secrets.BOT_ACCESS_TOKEN }}
           fetch-depth: 2
       - name: Checkout upstream
         uses: actions/checkout@v4
         with:
           repository: octogonz-dev-test/md-sync-upstream
           path: md-sync-upstream
-      - name: Commit
-        run: |
-          cd main
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          echo hi > test.txt
-          git add .
-          git commit -m "Automated sync of README sections from multiple repositories"
-          git push
-          
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Run script
+        run: node main/scripts/sync-readme.js --commit
+        
