@@ -15,4 +15,5 @@ jobs:
       - name: Checkout upstream
         uses: actions/checkout@v4
         with:
+          repository: octogonz-dev-test/md-sync-upstream
           path: md-sync-upstream
