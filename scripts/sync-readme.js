@@ -1,5 +1,7 @@
 const fs = require('fs');
 const path = require('path');
+const process = require('process');
+const childProcess = require('child_process');
 
 function findMarkerRange(lines, markerName, filePath) {
   const trimmedLines = lines.map((x) => x.trim());
@@ -33,10 +35,8 @@ function normalizeForCompare(text) {
   return text;
 }
 
-const { spawnSync } = require('child_process');
-
 function runCommand(command, args) {
-  const result = spawnSync(command, args, {
+  const result = childProcess.spawnSync(command, args, {
     stdio: 'inherit',
     shell: true
   });
@@ -90,6 +90,8 @@ if (
 ) {
   if (process.argv.indexOf('--commit') >= 0) {
     console.log('Commit to Git');
+
+    process.chdir(__dirname);
 
     runCommand(`git config --global user.name "github-actions[bot]"`);
     runCommand(`git config --global user.email "github-actions[bot]@users.noreply.github.com"`);
