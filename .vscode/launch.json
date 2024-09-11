@@ -8,7 +8,9 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/scripts/sync-readme.js"
+            "program": "${workspaceFolder}/scripts/sync-readme.js",
+            "args": ["--commit"],
+            "cwd": "${workspaceFolder}"
         }
     ]
 }

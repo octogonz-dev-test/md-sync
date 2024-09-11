@@ -90,9 +90,11 @@ if (
   // || syncReadme('../../md-sync-upstream2/folder/README.md', '../docs/index.md', 'sample2')
 ) {
   if (process.argv.indexOf('--commit') >= 0) {
-    console.log('Commit to Git');
+    console.log('Committing changes to Git');
 
-    process.chdir(__dirname);
+    const repositoryRootFolder = path.resolve(__dirname, '..')
+    console.log('Using repository root folder ' + repositoryRootFolder)
+    process.chdir(repositoryRootFolder);
 
     runCommand(`git`, [`config`, `--global`, `user.name`, `"github-actions[bot]"`]);
     runCommand(`git`, [`config`, `--global`, `user.email`, `"github-actions[bot]@users.noreply.github.com"`]);
