@@ -1,0 +1,18 @@
+name: Sync README fragments
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  sync-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          path: main
+          token: ${{ secrets.BOT_ACCESS_TOKEN }}
+          fetch-depth: 2
+      - name: Checkout upstream
+        uses: actions/checkout@v4
+        with:
+          path: md-sync-upstream
