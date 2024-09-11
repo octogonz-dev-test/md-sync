@@ -36,6 +36,7 @@ function normalizeForCompare(text) {
 }
 
 function runCommand(command, args) {
+  console.log(`> ${command} ${args.join(' ')}`);
   const result = childProcess.spawnSync(command, args, {
     stdio: 'inherit',
     shell: true
@@ -93,11 +94,11 @@ if (
 
     process.chdir(__dirname);
 
-    runCommand(`git config --global user.name "github-actions[bot]"`);
-    runCommand(`git config --global user.email "github-actions[bot]@users.noreply.github.com"`);
-    runCommand(`git add .`);
-    runCommand(`git commit -m "Automated sync of README sections from multiple repositories"`);
-    runCommand(`git push`);
+    runCommand(`git`, [`config`, `--global`, `user.name`, `"github-actions[bot]"`]);
+    runCommand(`git`, [`config`, `--global`, `user.email`, `"github-actions[bot]@users.noreply.github.com"`]);
+    runCommand(`git`, [`add`, `.`]);
+    runCommand(`git`, [`commit`, `-m`, `"Automated sync of README sections from multiple repositories"`]);
+    runCommand(`git`, [`push`]);
 
     console.log('Changes pushed successfully');
   } else {
